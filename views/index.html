@@ -35,6 +35,115 @@
     <script src="data.js"></script>
     
 
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    window.onload = function () {
+
+        let datap = []
+        
+        let crime, drama, mystery, thriller, war, action, scifi, comedy, animation, adventure, family, fantasy, romance, biography;
+        crime = drama = mystery = thriller = war = action = scifi = comedy = animation = adventure = family = fantasy = romance = biography = 0
+        
+        for (let i=0; i<movie_list.length; i++) {
+            
+            if (typeof movie_list[i]["genre"] == "string") {
+                movie_list[i]["genre"] = [movie_list[i]["genre"]]
+            }
+            for (let j=0; j<movie_list[i]["genre"].length; j++) {
+                if (movie_list[i]["genre"][j].toLowerCase() === "crime") {
+                    crime += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "drama") {
+                    drama += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "mystery") {
+                    mystery += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "thriller") {
+                    thriller += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "war") {
+                    war += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "action") {
+                    action += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "sci-fi") {
+                    scifi += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "comedy") {
+                    comedy += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "animation") {
+                    animation += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "adventure") {
+                    adventure += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "family") {
+                    family += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "fantasy") {
+                    fantasy += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "romance") {
+                    romance += movie_list[i]["roi"]
+                }
+                else if (movie_list[i]["genre"][j].toLowerCase() === "biography") {
+                    biography += movie_list[i]["roi"]
+                }
+            }
+            let duration = movie_list[i]["duration"]
+            let hours = duration.slice(duration.indexOf("T")+1, duration.indexOf("H"))
+            let minutes = duration.slice(duration.indexOf("H")+1, duration.indexOf("M"))
+            duration = parseInt(hours) * 60 + parseInt(minutes)
+            
+            movie_list[i]["duration"] = duration
+
+            let date = movie_list[i]["datePublished"]
+            
+            let month = date.split("-")[1]
+            
+            let quarter = 0
+            if (month == "01" || month =="02" || month == "03") {
+                quarter = 1
+            }
+            else if (month == "04" || month =="05" || month == "06") {
+                quarter = 2
+            }
+            else if (month == "07" || month =="08" || month == "09") {
+                quarter = 3
+            }
+            else {
+                quarter = 4
+            }
+            movie_list[i]["quarter"] = quarter
+            
+            datap.push({ x: movie_list[i]["name"].length, y: movie_list[i]["cumulative"], label: movie_list[i]["name"]})
+        }
+        const first_q = []
+        const second_q = []
+        const third_q = []
+        const forth_q = []
+        for (let i=0; i<movie_list.length; i++) {
+            if (movie_list[i].quarter == 1) {
+                first_q.push({label: "First Quarter", x: 1, y: movie_list[i]["roi"]})
+            }
+            else if (movie_list[i].quarter == 2) {
+                second_q.push({label: "Second Quarter", x: 2, y: movie_list[i]["roi"]})
+            }
+            else if (movie_list[i].quarter == 3) {
+                third_q.push({label: "Third Quarter", x: 3, y: movie_list[i]["roi"]})
+            }
+            else {
+                forth_q.push({label: "Forth Quarter", x: 4, y: movie_list[i]["roi"]})
+            }
+        }
+    }
+</script>
+
 
 </body>
 </html>
