@@ -1,0 +1,20 @@
+{
+    "name": "imdbapp",
+    "version": "0.0.1",
+    "description": "This is a web-scraping visualizer",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app"
+    },
+    "author": "Ori",
+    "license": "MIT",
+    "dependencies": {
+      "chart.js": "^2.9.4",
+      "ejs": "^3.1.5",
+      "express": "^4.17.1",
+      "node-fetch": "^2.6.1",
+      "path": "^0.12.7"
+    }
+  }
+  
