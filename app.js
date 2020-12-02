@@ -95,17 +95,12 @@ async function scraping() {
         final_list.push(fulfilled)
     }
     
-    
     write_stream.write(`const movie_list = [${String(final_list)}];`)
-    
-    return final_list
-      
-    
+    return final_list  
     }
   
 
-
-scraping.then(data => {
+scraping().then(data => {
     app.listen(app.get("port"), function(){
       console.log('Finished scraping and writing, The server is available at http://127.0.0.1:3000/')
     })
