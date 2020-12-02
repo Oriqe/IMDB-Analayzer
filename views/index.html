@@ -141,7 +141,169 @@
                 forth_q.push({label: "Forth Quarter", x: 4, y: movie_list[i]["roi"]})
             }
         }
+        var chart = new CanvasJS.Chart("chartContainer1", {
+            title:{
+                text: "Correlation between movie name length and Cumulative Worldwide Gross"              
+            },
+            data: [              
+            {
+                type: "column",
+                dataPoints: datap       
+            }
+            ]
+        });
+        chart.render();
+
+
+        const datak = []
+        const data_duration = []
+        for (let i=0; i<movie_list.length; i++) {
+            data_duration.push({x: parseInt(movie_list[i]["duration"]), y: movie_list[i]["roi"], label: movie_list[i]["name"]})
+            datak.push({ x:  parseFloat(movie_list[i]["aggregateRating"]["ratingValue"]), y: movie_list[i]["roi"], label: movie_list[i]["name"] + ` ${movie_list[i]["aggregateRating"]["ratingValue"]}`})
+        }
+        
+
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            title:{
+                text: "Correlation between movie runtime and ROI"              
+            },
+            data: [              
+            {
+                type: "column",
+                dataPoints: data_duration       
+            }
+            ]
+        });
+        chart2.render();
+
+        var chart3 = new CanvasJS.Chart("chartContainer3", {
+            title:{
+                text: "Correlation between movie rating and ROI"              
+            },
+            data: [              
+            {
+                type: "column",
+                dataPoints: datak       
+            }
+            ]
+        });
+        
+        chart3.render();
+
+
+        var chart4 = new CanvasJS.Chart("chartContainer4",
+        {
+            title:{
+                text: "ROI by movie type"
+            },
+            legend: {
+                maxWidth: 350,
+                itemWidth: 120
+            },
+            data: [
+            {
+                type: "pie",
+                showInLegend: true,
+                legendText: "{indexLabel}",
+
+
+                
+                dataPoints: [
+                    { y: crime, indexLabel: "Crime" },
+                    { y: drama, indexLabel: "Drama" },
+                    { y: mystery, indexLabel: "Mystery" },
+                    { y: thriller, indexLabel: "Thriller"},
+                    { y: war, indexLabel: "War" },
+                    { y: action, indexLabel: "Action"},
+                    { y: scifi, indexLabel: "Sci-Fi"},
+                    { y: comedy, indexLabel: "Comedy" },
+                    { y: animation, indexLabel: "Animation" },
+                    { y: adventure, indexLabel: "Adventure" },
+                    { y: family, indexLabel: "Family"},
+                    { y: fantasy, indexLabel: "Fantasy" },
+                    { y: romance, indexLabel: "Romance"},
+                    { y: biography, indexLabel: "Biography"}
+                ]
+            }
+            ]
+        });
+	chart4.render();
+
+    
+    let max = Math.max(first_q.length, second_q.length, third_q.length, forth_q.length)
+    
+    const data_sets = []
+    for (let i=0; i<max; i++) {
+        data_sets[i] = []
+        if (first_q.length > i) {
+            data_sets[i].push(first_q[i])
+        }
+        if (second_q.length > i) {
+            data_sets[i].push(second_q[i])
+        }
+        if (third_q.length > i) {
+            data_sets[i].push(third_q[i])
+        }
+        if (forth_q.length > i) {
+            data_sets[i].push(forth_q[i])
+        }
     }
+
+    
+    var chart5 = new CanvasJS.Chart("chartContainer5",
+    {
+      title:{
+      text: "Correlation between release quarter and ROI"
+      },
+        data: [
+      {
+        type: "stackedColumn",
+        dataPoints: data_sets[0]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[1]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[2]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[3]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[4]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[5]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[6]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[7]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[8]
+      },  {
+        type: "stackedColumn",
+         dataPoints: data_sets[9]
+      }
+      ]
+    });
+    chart5.render();
+
+    }
+    
+    
+</script>
+
+<div id="chartContainer1" class="charts" style="height: 300px; width: 100%; display: none"></div> 
+<div id="chartContainer2" class="charts" style="height: 300px; width: 100%; display: none"></div>
+<div id="chartContainer3" class="charts" style="height: 300px; width: 100%; display: none"></div>
+<div id="chartContainer4" class="charts" style="height: 300px; width: 100%; display: none"></div>
+<div id="chartContainer5" class="charts" style="height: 300px; width: 100%; display: none"></div>
+
+<script src="events.js"></script>
+
 </script>
 
 
